@@ -43,7 +43,7 @@ let handler = async (m, { q, reply }) => {
 
   } catch (e) {
     console.error(e);
-    reply(`Gagal memindahkan plugin:\n${e.message}`);
+    reply(`Error al mover el complemento:\n${e.message}`);
   }
 };
 
