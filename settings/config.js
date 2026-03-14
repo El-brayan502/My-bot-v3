@@ -33,6 +33,6 @@ global.mess = {
     group: "ngapain? khusus grup njrr",
     admin: "ngapain? khusus admin njrr",
     private: "ngapain? khusu private njirr",
-    owner: "apalah, bukan owner",
+    owner: "lo que sea, no el dueño",
     botadmin: "bot bukan admin"
 }
