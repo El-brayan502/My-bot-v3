@@ -10,7 +10,7 @@ let handler = async (m, { q, reply }) => {
     let [oldPath, newPath] = q.split('|').map(p => p.trim());
 
     if (!oldPath || !newPath) {
-      return reply('Path lama dan path baru tidak boleh kosong.');
+      return reply('El camino antiguo y el camino nuevo no pueden estar vacíos..');
     }
 
     if (!oldPath.endsWith('.js')) oldPath += '.js';
