@@ -4,7 +4,7 @@ import path from 'path';
 let handler = async (m, { q, reply }) => {
   try {
     let fullPath = q.trim();
-    if (!fullPath) return reply('Tentukan path file yang ingin dihapus.\nContoh: `.delplug owner/test.js`');
+    if (!fullPath) return reply('Especifique la ruta del archivo que desea eliminar.\nEjemplo: `.delplug owner/test.js`"`');
 
     if (!fullPath.endsWith('.js')) fullPath += '.js';
 
