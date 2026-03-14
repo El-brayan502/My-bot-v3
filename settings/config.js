@@ -33,6 +33,6 @@ global.mess = {
     group: "ngapain? khusus grup njrr",
     admin: "ngapain? khusus admin njrr",
     private: "¿Qué estás haciendo? Especialmente en privado, hombre.",
-    owner: "lo que sea, no el dueño",
+    owner: "este comando sólo para owner",
     botadmin: "Bot, no administrador"
 }
