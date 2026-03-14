@@ -39,7 +39,7 @@ let handler = async (m, { q, reply }) => {
     
     await fs.move(targetOldPath, targetNewPath);
 
-    reply(`✅ Plugin berhasil dipindahkan:\nDari: ${oldPath}\nKe: ${newPath}\n\nPerubahan akan aktif (hot-reload) dalam beberapa detik.`);
+    reply(`✅ Complemento movido correctamente:\nDesde: ${oldPath}\nA: ${newPath}\n\nLos cambios estarán activos (recarga en caliente) en unos segundos.`);
 
   } catch (e) {
     console.error(e);
