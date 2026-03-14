@@ -21,7 +21,7 @@ global.capikey = "";
 global.namebotz = "і𝗍ᥲᥴһі ᑲ᥆𝗍 mძ 𐦖";
 global.packname = 'ᑲrᥲᥡᥲᥒ 𝗍ᥙ ⍴ᥲ⍴ᥲі 🫵😒';
 global.nameown = "Bryan330 | Projects";
-global.author = 'https://www.github.com/El-brayan502;
+global.author = 'https://www.github.com/El-brayan502';
 global.footer = "𝗍𝖾𝗅𝖾𝗀𝗋𝖺𝗆: @DevBrayan";
 
 global.YouTube = "https://www.youtube.com/@xd";
