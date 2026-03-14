@@ -25,7 +25,7 @@ let handler = async (m, { reply }) => {
     const cmdDir = path.resolve(rootDir, './cmd');
 
     if (!await fs.pathExists(cmdDir)) {
-      return reply('Folder `./cmd/` tidak ditemukan.');
+      return reply('No se encontró la carpeta `./cmd/`.');
     }
 
     const files = listJsFilesRecursively(cmdDir);
