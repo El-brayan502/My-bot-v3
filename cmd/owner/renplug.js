@@ -4,7 +4,7 @@ import path from 'path';
 let handler = async (m, { q, reply }) => {
   try {
     if (!q.includes('|')) {
-      return reply('Format salah.\nContoh: `.renplug path/lama.js | path/baru.js`');
+      return reply('Formato no válido.\nEjemplo: `.renplug path/old.js | path/new.js``');
     }
 
     let [oldPath, newPath] = q.split('|').map(p => p.trim());
