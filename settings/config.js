@@ -18,6 +18,9 @@ global.domain = ""
 global.apikey = ""; 
 global.capikey = ""; 
 
+
+global.APIKeys = {  'https://mayapi.ooguy.com': 'may-f53d1d49'}
+
 global.namebotz = "і𝗍ᥲᥴһі ᑲ᥆𝗍 mძ 𐦖";
 global.packname = 'ᑲrᥲᥡᥲᥒ 𝗍ᥙ ⍴ᥲ⍴ᥲі 🫵😒';
 global.nameown = "Bryan330 | Projects";
