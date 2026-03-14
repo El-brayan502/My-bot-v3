@@ -4,7 +4,7 @@ import path from 'path';
 let handler = async (m, { q, reply }) => {
   try {
     let fullPath = q.trim();
-    if (!fullPath) return reply('Especifique la ruta del archivo que desea eliminar.\nEjemplo: `.delplug owner/test.js`"`');
+    if (!fullPath) return reply('Especifique la ruta del archivo que desea eliminar.\nEjemplo: `.delplug owner/test.js`');
 
     if (!fullPath.endsWith('.js')) fullPath += '.js';
 
@@ -15,7 +15,7 @@ let handler = async (m, { q, reply }) => {
 
     const relativePath = path.relative(cmdDir, targetPath);
     if (relativePath.startsWith('..') || path.isAbsolute(relativePath)) {
-      return reply('Error: Ilegal path traversal detected.\nAnda hanya boleh menghapus file di dalam folder `./cmd/`');
+      return reply('Error: Se detectó un recorrido de ruta ilegal.\nSolo puede eliminar archivos dentro de la carpeta ./cmd/');
     }
 
     if (await fs.pathExists(targetPath)) {
