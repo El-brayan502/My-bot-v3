@@ -7,7 +7,7 @@ handler.before = async function (m, { conn, isBotAdmin }) {
     const toxicWords = /anjing|babi|kntl|memek|ajg|goblog|tolol|peler|asuh/i
     
     if (toxicWords.test(text)) {
-        await m.reply(`*─── [ TOXIC DETECTED ] ───*\n\nHai @${m.sender.split('@')[0]}, peringatan keras!\nSiapapun dilarang berkata kasar di grup ini tanpa pengecualian.`)
+        await m.reply(`*─── [ TOXIC DETECTED ] ───*\n\nHai @${m.sender.split('@')[0]}, ¡Advertencia estricta!\nNadie tiene permitido decir cosas groseras en este grupo, sin excepción.
         
         if (isBotAdmin) {
             try {
