@@ -38,11 +38,11 @@ let handler = async (m, { reply }) => {
       return `• ${path.relative(cmdDir, fullPath).replace(/\\/g, '/')}`;
     }).join('\n');
 
-    reply(`📦 *Daftar Plugin Terinstal:*\n\n${fileList}`);
+    reply(`📦 *Lista de complementos instalados:*\n\n${fileList}`);
 
   } catch (e) {
     console.error(e);
-    reply(`Gagal mengambil daftar plugin:\n${e.message}`);
+    reply(`No se pudo obtener la lista de complementos:\n${e.message}`);
   }
 };
 
