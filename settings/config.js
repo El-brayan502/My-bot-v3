@@ -30,7 +30,7 @@ global.Telegram = "https://t.me/DevBrayan";
 global.ChannelWA = "https://whatsapp.com/channel/0029Vb6BDQc0lwgsDN1GJ31i";
 
 global.mess = {
-    group: "ngapain? khusus grup njrr",
+    group: "que pasa? eso es solo para grupos",
     admin: "ngapain? khusus admin njrr",
     private: "¿Qué estás haciendo? Especialmente en privado, hombre.",
     owner: "este comando sólo para owner",
