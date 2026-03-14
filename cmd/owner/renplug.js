@@ -34,7 +34,7 @@ let handler = async (m, { q, reply }) => {
     }
 
     if (await fs.pathExists(targetNewPath)) {
-      return reply(`File di path baru sudah ada:\n${targetNewPath}\n\nHapus file tersebut dulu jika ingin mengganti.`);
+      return reply(`El archivo en la nueva ruta ya existe:\n${targetNewPath}\n\nElimine primero el archivo si desea reemplazarlo..`);
     }
     
     await fs.move(targetOldPath, targetNewPath);
