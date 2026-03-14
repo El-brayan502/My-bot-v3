@@ -26,7 +26,7 @@ let handler = async (m, { q, reply }) => {
     const relNew = path.relative(cmdDir, targetNewPath);
 
     if (relOld.startsWith('..') || path.isAbsolute(relOld) || relNew.startsWith('..') || path.isAbsolute(relNew)) {
-      return reply('Error: Ilegal path traversal detected.\nAnda hanya boleh memindahkan file di dalam folder `./cmd/`');
+      return reply('Error: Se detectó un recorrido de ruta ilegal.\nSolo puede mover archivos dentro de la carpeta `./cmd/`.`');
     }
 
     if (!await fs.pathExists(targetOldPath)) {
