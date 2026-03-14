@@ -2,7 +2,8 @@ import { execSync } from 'child_process'
 
 let handler = async (m, { conn, text }) => {
   try {
-    await m.react('🕒')
+
+    await conn.sendMessage(m.chat, { react: { text: '🕒', key: m.key } })
 
     const cmd = 'git pull' + (m.fromMe && text ? ' ' + text : '')
     const out = execSync(cmd, { encoding: 'utf-8' })
@@ -10,16 +11,19 @@ let handler = async (m, { conn, text }) => {
     await conn.reply(
       m.chat,
       `🛠️ *ACTUALIZACIÓN DEL BOT*\n\n${out.trim() || '✅ Actualizado correctamente'}`,
-      m,
+      m
     )
 
-    await m.react('✅')
+    await conn.sendMessage(m.chat, { react: { text: '✅', key: m.key } })
+
   } catch (e) {
-    await m.react('❌')
+
+    await conn.sendMessage(m.chat, { react: { text: '❌', key: m.key } })
+
     await conn.reply(
       m.chat,
       `⚠️ *Error al actualizar*\n\n${e.message}`,
-      m,
+      m
     )
   }
 }
