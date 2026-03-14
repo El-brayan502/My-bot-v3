@@ -31,7 +31,7 @@ global.ChannelWA = "https://whatsapp.com/channel/0029Vb6BDQc0lwgsDN1GJ31i";
 
 global.mess = {
     group: "que pasa? eso es solo para grupos",
-    admin: "ngapain? khusus admin njrr",
+    admin: "que pasa? es solo para admins",
     private: "¿Qué estás haciendo? Especialmente en privado, hombre.",
     owner: "este comando sólo para owner",
     botadmin: "Bot, no administrador"
