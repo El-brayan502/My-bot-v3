@@ -186,7 +186,7 @@ export default async (conn, m) => {
 
     if (reactions) {
       if (["😂"].includes(reactions)) {
-        conn.sendMessage(m.chat, { text: "*KWKWKWKWK😹*" }, { quoted: null });
+        conn.sendMessage(m.chat, { text: "*JAJAJAJA 😹*" }, { quoted: null });
       }
     }
 
@@ -257,7 +257,7 @@ export default async (conn, m) => {
 
     if (body.startsWith("$")) {
       if (!isOwner) return;
-      await reply("_Executing..._");
+      await reply("_Ejecutando..._");
 
       exec(q, async (err, stdout) => {
         if (err) return reply(`${err}`);
@@ -308,10 +308,10 @@ export default async (conn, m) => {
     }
 
     if (m.message) {
-      const time = new Date().toLocaleTimeString("id-ID", { hour12: false });
+      const time = new Date().toLocaleTimeString("es-GT", { hour12: false });
       const line = chalk.gray("│");
       const who = `${chalk.yellow(pushName)} ${chalk.gray("(" + m.sender + ")")}`;
-      const place = isGroup ? chalk.magenta("Group: " + groupName) : chalk.green("Private");
+      const place = isGroup ? chalk.magenta("Grupo: " + groupName) : chalk.green("Privado");
 
       console.log(
         chalk.gray("╭────────────────────────────────"),
@@ -344,20 +344,20 @@ export default async (conn, m) => {
       const sorted = similarities.sort((a, b) => b.percent - a.percent).slice(0, 3);
       const filtered = sorted.filter((s) => s.percent >= 60);
       const suggestions = filtered
-        .map((s, i) => `${i + 1}. *${prefix + s.name}* — ${s.percent}%`)
+        .map((s, i) => `\( {i + 1}. * \){prefix + s.name}* — ${s.percent}%`)
         .join("\n");
 
       if (filtered.length > 0) {
         const buttons = filtered.map((s) => ({
-          buttonId: `${prefix}${s.name}`,
-          buttonText: { displayText: `${prefix}${s.name}` },
+          buttonId: `\( {prefix} \){s.name}`,
+          buttonText: { displayText: `\( {prefix} \){s.name}` },
           type: 1
         }));
 
         await conn.sendMessage(
           m.chat,
           {
-            text: `🔍 Mungkin yang kamu maksud:\n${suggestions}`,
+            text: `🔍 Quizás quisiste decir:\n${suggestions}`,
             footer: global.namebotz || "Bot",
             buttons,
             headerType: 1,
@@ -373,19 +373,20 @@ export default async (conn, m) => {
     switch (commands) {
       case "mode": {
         await reaction(m.chat, "🧠");
-        reply(`🤖 Bot Mode: ${conn.public ? "Public" : "Self"}`);
+        reply(`🤖 Modo del bot: ${conn.public ? "Público" : "Solo yo"}`);
         break;
       }
 
       case "cekidch":
       case "idch": {
-        if (!q) return reply(`*Contoh penggunaan :*\nketik ${commands} linkchannel`);
+        if (!q) return reply(`*Ejemplo:*\n\( {prefix} \){commands} enlacecanal`);
         if (!q.includes("https://whatsapp.com/channel/"))
-          return reply("Link channel tidak valid");
+          return reply("El enlace del canal no es válido");
 
         const result = q.split("https://whatsapp.com/channel/")[1];
         const res = await conn.newsletterMetadata("invite", result);
         return reply(`${res.id}`);
+        break;
       }
 
       case "sticker":
@@ -394,24 +395,24 @@ export default async (conn, m) => {
         const mime = (quotedMessage.msg || quotedMessage).mimetype || "";
 
         if (!/image|video/.test(mime))
-          return reply(`Reply sebuah gambar/video dengan caption ${prefix}${commands}`);
+          return reply(`Responde a una imagen o video con el comando \( {prefix} \){commands}`);
 
         try {
           if (/image/.test(mime)) {
             const media = await quotedMessage.download();
-            const imageUrl = `data:${mime};base64,${media.toString("base64")}`;
+            const imageUrl = `data:\( {mime};base64, \){media.toString("base64")}`;
             await makeStickerFromUrl(imageUrl, conn, m, reply);
           } else if (/video/.test(mime)) {
             if ((quotedMessage?.msg || quotedMessage)?.seconds > 10)
-              return reply("Durasi video maksimal 10 detik!");
+              return reply("¡El video no puede durar más de 10 segundos!");
 
             const media = await quotedMessage.download();
-            const videoUrl = `data:${mime};base64,${media.toString("base64")}`;
+            const videoUrl = `data:\( {mime};base64, \){media.toString("base64")}`;
             await makeStickerFromUrl(videoUrl, conn, m, reply);
           }
         } catch (error) {
           console.error(error);
-          return reply("Terjadi kesalahan saat memproses media. Coba lagi.");
+          return reply("Ocurrió un error al procesar el archivo. Intenta de nuevo.");
         }
         break;
       }
@@ -419,13 +420,13 @@ export default async (conn, m) => {
       case "autotag":
       case "atag": {
         try {
-          if (args.length < 2) return reply(`*${prefix + command}* 628xx,628xx url caption`);
+          if (args.length < 2) return reply(`*Ejemplo:* \( {prefix} \){command} 502xxxx,503xxxx https://... texto aquí`);
 
-          const kontol = args[0];
-          const memek = args[1];
-          const fauzi = args.slice(2).join(" ");
+          const numeros = args[0];
+          const url = args[1];
+          const texto = args.slice(2).join(" ");
 
-          const jids = kontol
+          const jids = numeros
             .split(",")
             .map((n) => n.replace(/[^0-9]/g, "") + "@s.whatsapp.net")
             .filter((v) => v.length > 15);
@@ -433,26 +434,20 @@ export default async (conn, m) => {
           if (typeof conn.sendStatusMentions === "function") {
             await conn.sendStatusMentions(
               {
-                image: { url: memek },
-                fauzi
+                image: { url },
+                caption: texto
               },
               jids
             );
 
             reply(
-              `✅ Status berhasil dikirim dan mention ke: ${jids
-                .map((j) => `@${j.split("@")[0]}`)
-                .join(", ")}`,
-              m.chat,
-              { mentions: jids }
+              `✅ Estado enviado con mención a:\n\( {jids.map((j) => `@ \){j.split("@")[0]}`).join(", ")}`
             );
           } else {
-            reply(
-              "Baileys kamu belum mendukung `sendStatusMentions()`. Perbarui Baileys atau aktifkan fitur Status API."
-            );
+            reply("Tu versión de Baileys no soporta sendStatusMentions(). Actualiza la librería.");
           }
         } catch (err) {
-          reply("❌ Gagal mengirim status mention.\n" + String(err?.message || err));
+          reply("❌ No se pudo enviar el estado con menciones.\n" + String(err?.message || err));
         }
         break;
       }
@@ -469,11 +464,11 @@ export default async (conn, m) => {
       }
 
       case "getcase": {
-        if (!isOwner) return reply("Perintah ini hanya untuk Owner.");
-        if (!q) return reply(`Contoh: ${prefix}getcase namacase`);
+        if (!isOwner) return reply("Solo el dueño puede usar este comando.");
+        if (!q) return reply(`Ejemplo: ${prefix}getcase nombrecase`);
         try {
-          const hasil = Case.get(q);
-          reply(`✅ Case ditemukan:\n\n${hasil}`);
+          const resultado = Case.get(q);
+          reply(`✅ Case encontrado:\n\n${resultado}`);
         } catch (e) {
           reply(e.message);
         }
@@ -481,15 +476,15 @@ export default async (conn, m) => {
       }
 
       case "addcase": {
-        if (!isOwner) return reply("Perintah ini hanya untuk Owner.");
+        if (!isOwner) return reply("Solo el dueño puede usar este comando.");
         if (!q)
           return reply(
-            `Contoh: ${prefix}addcase case "namacase": {\n  reply("test");\n  break;\n}`
+            `Ejemplo:\n${prefix}addcase case "nombre": {\n  reply("prueba");\n  break;\n}`
           );
         try {
           Case.add(q);
           reply(
-            "✅ Case berhasil ditambahkan.\n\n*Catatan:* Harap restart bot agar perintah baru dapat dieksekusi."
+            "✅ Case agregado con éxito.\n\n*Nota:* Reinicia el bot para que funcione el nuevo comando."
           );
         } catch (e) {
           reply(e.message);
@@ -498,12 +493,12 @@ export default async (conn, m) => {
       }
 
       case "delcase": {
-        if (!isOwner) return reply("Perintah ini hanya untuk Owner.");
-        if (!q) return reply(`Contoh: ${prefix}delcase namacase`);
+        if (!isOwner) return reply("Solo el dueño puede usar este comando.");
+        if (!q) return reply(`Ejemplo: ${prefix}delcase nombrecase`);
         try {
           Case.delete(q);
           reply(
-            `✅ Case "${q}" berhasil dihapus.\n\n*Catatan:* Harap restart bot untuk menerapkan perubahan.`
+            `✅ Case "${q}" eliminado.\n\n*Nota:* Reinicia el bot para aplicar los cambios.`
           );
         } catch (e) {
           reply(e.message);
@@ -512,21 +507,21 @@ export default async (conn, m) => {
       }
 
       case "listcase": {
-        if (!isOwner) return reply("Perintah ini hanya untuk Owner.");
+        if (!isOwner) return reply("Solo el dueño puede usar este comando.");
         try {
-          const listString = Case.list();
+          const lista = Case.list();
 
-          if (listString === "Tidak ada case!") {
-            return reply("📜 *List Case*\n\nBelum ada case custom yang ditambahkan.");
+          if (lista === "Tidak ada case!") {
+            return reply("📜 *Lista de cases*\n\nAún no hay cases personalizados agregados.");
           }
 
-          const cmds = listString.split("\n");
+          const cmds = lista.split("\n");
           const total = cmds.length;
 
-          const formattedList = cmds.map((cmd) => `- ${prefix}${cmd}`).join("\n");
-          const replyText = `*--- LIST CASE ---*\n\n${formattedList}\n\n*Total: ${total} Case*`;
+          const listaFormateada = cmds.map((cmd) => `- \( {prefix} \){cmd}`).join("\n");
+          const texto = `*LISTA DE CASES PERSONALIZADOS*\n\n${listaFormateada}\n\n*Total: ${total} cases*`;
 
-          reply(replyText.trim());
+          reply(texto.trim());
         } catch (e) {
           reply(e.message);
         }
@@ -536,13 +531,13 @@ export default async (conn, m) => {
       case "rvo":
       case "readviewonce": {
         if (!m.quoted)
-          return conn.sendMessage(m.chat, { text: "reply pesan viewOnce nya!" }, { quoted: m });
+          return reply("¡Responde al mensaje de vista única!");
 
         const msg = m.quoted.message || m.quoted.fakeObj.message;
         const type = Object.keys(msg)[0];
 
         if (!msg[type].viewOnce && m.quoted.mtype !== "viewOnceMessageV2") {
-          return conn.sendMessage(m.chat, { text: "Pesan itu bukan viewonce!" }, { quoted: m });
+          return reply("¡Ese mensaje no es de vista única!");
         }
 
         const media = await downloadContentFromMessage(
@@ -583,60 +578,52 @@ export default async (conn, m) => {
       case "cekapikey":
       case "cekkey": {
         if (!q)
-          return reply(`Contoh Penggunaan:\n${prefix}cekapikey [API Key anda]`);
+          return reply(`Ejemplo:\n${prefix}cekapikey TU_CLAVE_API`);
 
-        const API_KEY_TO_CHECK = q.trim();
-        const BASE_URL = "https://velyn.mom/api/tools/check";
+        const clave = q.trim();
+        const url = "https://velyn.mom/api/tools/check";
 
         await reaction(m.chat, "🔎");
 
         try {
-          const response = await axios.get(BASE_URL, {
-            params: { apikey: API_KEY_TO_CHECK }
+          const respuesta = await axios.get(url, {
+            params: { apikey: clave }
           });
 
-          const result = response.data;
-          const data = result.data;
+          const resultado = respuesta.data;
+          const datos = resultado.data;
 
-          if (result.success === true && data) {
-            const createdAtDate = new Date(data.createdAt).toLocaleDateString("id-ID", {
-              timeZone: "Asia/Jakarta"
+          if (resultado.success === true && datos) {
+            const fecha = new Date(datos.createdAt).toLocaleDateString("es-GT", {
+              timeZone: "America/Guatemala"
             });
 
-            const replyText = `*HASIL CEK API KEY*
+            const texto = `*RESULTADO DE LA API KEY*
 
-*Status:* ✅ *AKTIF*
-*Key:* \`${data.key}\`
-*Role:* ${data.role.toUpperCase()}
-*Credit Tersisa:* ${data.remaining}
-*Dibuat Pada:* ${createdAtDate}
-*Reset Credit:* ${data.daysUntilReset} hari lagi`;
+*Estado:* ✅ *ACTIVA*
+*Clave:* \`${datos.key}\`
+*Rol:* ${datos.role.toUpperCase()}
+*Créditos restantes:* ${datos.remaining}
+*Fecha creación:* ${fecha}
+*Reinicio de créditos:* en ${datos.daysUntilReset} días`;
 
-            reply(replyText.trim());
+            reply(texto.trim());
           } else {
-            const replyText = `🔑 *HASIL CEK API KEY* 🔑
+            reply(`🔑 *API KEY NO VÁLIDA*
 
-*Key:* \`${API_KEY_TO_CHECK}\`
-*Status:* ❌ *TIDAK VALID / KADALUARSA*
-*Pesan API:* ${result.message || "API Key tidak valid atau tidak terdaftar."}`;
-
-            reply(replyText.trim());
+*Clave:* \`${clave}\`
+*Estado:* ❌ *Inválida o expirada*
+*Mensaje:* ${resultado.message || "No registrada"}`);
           }
         } catch (error) {
           const status = error.response?.status;
+          let msgError = `❌ Error de conexión (código \( {status || "desconocido"})\n \){error.message}`;
 
-          let errorMessage;
           if (status === 404) {
-            errorMessage =
-              `❌ *Gagal:* Terjadi kesalahan koneksi (Status 404).\n\n` +
-              `Mohon pastikan API Key benar dan *endpoint* \`${BASE_URL}\` valid.`;
-          } else {
-            errorMessage = `❌ Terjadi kesalahan koneksi. Status: ${
-              status || "N/A"
-            }. Pesan: ${error.message}`;
+            msgError = "❌ Error 404 - La clave o el endpoint parece incorrecto";
           }
 
-          reply(errorMessage);
+          reply(msgError);
         }
 
         break;
