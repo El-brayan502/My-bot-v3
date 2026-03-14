@@ -30,7 +30,7 @@ let handler = async (m, { q, reply }) => {
     }
 
     if (!await fs.pathExists(targetOldPath)) {
-      return reply(`Archivo antiguo no encontrado:\n${targetOldPath`);
+      return reply(`Archivo antiguo no encontrado:\n${targetOldPath}`);
     }
 
     if (await fs.pathExists(targetNewPath)) {
